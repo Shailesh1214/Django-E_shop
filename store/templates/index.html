@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-cart</title>
+</head>
+<body>
+
+<!--Getting the products-->
+{% for Product in products %}
+    <table>
+        <tr>
+            <td>{{Product.name}}</td>
+            <td>:{{Product.category.name}}</td>
+            <td>{{Product.price}}</td>
+            <td>{{Product.image}}</td>
+            
+        </tr>
+    </table>
+{%endfor%}
+</body>
+</html>
