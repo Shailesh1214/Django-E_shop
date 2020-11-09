@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render 
 from django.http import  HttpResponse
-# Create your views here.
 from .models.product import Product
 from .models.category import Category
+from .models.customer import Customer 
 
 def index(request):
-    products = Product.get_all_products();
+    products = Product.get_all_products()
     categories = Category.get_all_categories()
     categoryID = (request.GET.get('category'))
     if categoryID:
@@ -16,3 +16,22 @@ def index(request):
     data['products'] = products
     data['categories'] = categories
     return render(request,'index.html', data)
+
+def signup(request):
+    if request.method == 'GET':
+        return render(request,'signup.html')
+    else:
+        postData = request.POST
+        first_name = postData.get('firstname')
+        last_name = postData.get('lastname')
+        phone = postData.get('phone')
+        email = postData.get('email')
+        password = postData.get('password')
+        print(first_name, last_name, phone, email, password )
+        customer = Customer(first_name=first_name, 
+                            last_name=last_name, 
+                            phone=phone,
+                            email=email,
+                            password=password)
+        customer.save()
+        return HttpResponse("Signup Success")
