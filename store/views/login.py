@@ -7,7 +7,7 @@ class Login(View):
     def get(self,request):
         return render(request, 'Login.html')
 
-    def post(seld,request):
+    def post(self,request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         customer = Customer.get_customer_by_email(email)
@@ -15,6 +15,8 @@ class Login(View):
         if customer:
             flag = check_password(password, customer.password)
             if flag:
+                request.session['customer_id'] = customer.id
+                request.session['email'] = customer.email
                 return redirect('homepage')
             else:
                 error_message ='Email or password invalid !!'

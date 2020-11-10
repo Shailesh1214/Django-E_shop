@@ -20,9 +20,14 @@
                 <div class="card mx-auto mb-3" style="width: 18rem;">
                     <img src="{{Product.image.url}}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">{{Product.name}}</h5>
+                        <p class="card-title">{{Product.name}}</p>
                         <p class="card-text"><b>{{Product.price}}</b></p>
-                        <a href="#" class="btn border btn-sm">Add To Cart</a>
+
+                        <form action="/" method="POST">
+                            {% csrf_token %}
+                            <input type="text" name='product' value='{{Product.id}}'>
+                            <input type="submit" class="float-right btn btn-light border btn-sm" value="Add To Cart">
+                        </form>
                     </div>
                 </div>
                 {%endfor%}
