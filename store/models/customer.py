@@ -9,10 +9,8 @@ class Customer(models.Model):
     email = models.EmailField()
     password = models.CharField(max_length=500)
 
-
-    def save(self):
+    def register(self):
         self.save()
-
 
     def isExists(self):
         if Customer.objects.filter(email=self.email):
