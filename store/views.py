@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect
 from django.http import  HttpResponse
 from django.contrib.auth.hashers import make_password, check_password
 from .models.product import Product
 from .models.category import Category
 from .models.customer import Customer
+
 
 def index(request):
     products = Product.get_all_products()
@@ -79,4 +80,23 @@ def signup(request):
         return render(request,'signup.html')
     else:
         return registerUser(request)
-    
+
+def Login(request):
+    if request.method == 'GET':
+        return render(request, 'Login.html')
+    else:
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        customer = Customer.get_customer_by_email(email)
+        error_message = None
+        if customer:
+            flag = check_password(password, customer.password)
+            if flag:
+                return redirect('homepage')
+            else:
+                error_message ='Email or password invalid !!'
+        else:
+            error_message ='Email or password invalid !!'
+        print(customer)
+        print(email, password)
+        return render(request,'Login.html',{'error':error_message})
