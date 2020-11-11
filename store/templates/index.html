@@ -24,19 +24,22 @@
                     <div class="card-body">
                         <p class="card-title">{{Product.name}}</p>
                         <p class="card-text"><b>{{Product.price}}</b></p>
-                        {{Product | is_in_cart:request.session.cart}}
+                        <!-- {{Product | is_in_cart:request.session.cart}} -->
                     </div>
-                    <div class="card-footer p-0 row no-gutters">
+                    <div class="card-footer p-0  no-gutters">
+                        {% if Product|is_in_cart:request.session.cart %}
+                        <div class = "row no-gutters" >
+                            <input type ="submit" value="-" class="col-2 btn btn-block btn-secondary">
+                            <div class="text-center col"> 2 in cart </div>
+                            <input type ="submit" value="+" class="col-2 btn btn-block btn-secondary">
+                        </div>
+                        {% else %}
                         <form action="/" method="POST" class="btn-block">
                             {% csrf_token %}
                             <input type="text" name='product' value='{{Product.id}}'>
                             <input type="submit" class="float-right btn-block btn-light border btn-sm" value="Add To Cart">
                         </form>
-                        <div class = "row" hidden>
-                            <input type ="submit" value="-" class="col-2 btn btn-block btn-secondary">
-                            <div class="text-center col"> 2 in cart </div>
-                            <input type ="submit" value="+" class="col-2 btn btn-block btn-secondary">
-                        </div>
+                        {% endif%}
                     </div>
                         
                     
