@@ -6,17 +6,17 @@ from django.views import View
 # create your view here
 class Index(View):
     def post(self, request):
-        product =request.POST.get('product')
+        Product =request.POST.get('product')
         cart =request.session.get('cart')
         if cart:
-            quantity = cart.get(product)
+            quantity = cart.get(Product)
             if quantity:
-                cart[product] = quantity+1
+                cart[Product] = quantity+1
             else:
-                cart[product]=1
+                cart[Product]=1
         else:
             cart= {}
-            cart[product]=1
+            cart[Product]=1
 
         request.session['cart']=cart
         print(cart)
