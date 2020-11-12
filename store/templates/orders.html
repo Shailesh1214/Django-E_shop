@@ -5,13 +5,13 @@
 {% load cart %}
 {% load custom_filter %}
 <div class="container">
-    <div class="border rounded p-4 m-4">
+   <div class="border rounded p-4 m-4">
         <p class="display-4 pl-4 ml-4">Your Orders</p>
         <hr>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Sr.no.</th>
+                    <th>Sno.</th>
                     <th>Image</th>
                     <th>Product</th>
                     <th>Date</th>
@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-
+                
                 {% for order in orders %}
                 <tr>
                     <td>{{forloop.counter}}</td>
@@ -40,11 +40,16 @@
                 </tr>
 
                 {% endfor %}
-
+               
             </tbody>
 
         </table>
-
-    </div>
+       
+   </div>
 </div>
-{% endblock%}
+
+
+
+
+
+{% endblock %}
