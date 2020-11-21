@@ -3,10 +3,11 @@ from django.contrib.auth.hashers import make_password
 from store.models.customer import Customer
 from django.views import View
 
+
 class Signup(View):
 
     def get(self, request):
-        return render(request,'signup.html')
+        return render(request, 'signup.html')
 
     def post(self, request):
         postData = request.POST
@@ -15,7 +16,7 @@ class Signup(View):
         phone = postData.get('phone')
         email = postData.get('email')
         password = postData.get('password')
-        #validation
+        # validation
         value ={
             'first_name':first_name,
             'last_name': last_name,
@@ -28,7 +29,7 @@ class Signup(View):
                             email=email,
                             password=password)
         error_message = self.validateCustomer(customer)
-        #Register
+        # Register
         if not error_message:
             print(first_name, last_name, phone, email, password )
             customer.password =make_password(customer.password)
